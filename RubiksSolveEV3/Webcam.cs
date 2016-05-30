@@ -291,8 +291,6 @@ namespace RubiksSolveEV3
                 );
             }
 
-            thresh_rgb.ToManagedImage().Save("Snapshot.png", ImageFormat.Png);
-
             // Use a weighted euclidean distance to sort in order (UL, DL, UR, DR)
             var sortedPts = intersects.OrderBy(p => 2*p.X*p.X + p.Y*p.Y).ToArray();
 
@@ -309,7 +307,10 @@ namespace RubiksSolveEV3
             // Draw on the image to show the final result
             Drawing.Rectangle(thresh_rgb, centerRect, Color.Orange);
 
-            // Save image & free resources
+            // Save image
+            thresh_rgb.ToManagedImage().Save("Snapshot.png", ImageFormat.Png);
+
+            // free resources
             thresh_rgb.Dispose();
             thresh.Dispose();
 
